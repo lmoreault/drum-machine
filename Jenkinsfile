@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        node {
+            label 'linux'
+        }
+    }
     tools {
         nodejs 'NodeJS9'
     }
