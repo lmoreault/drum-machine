@@ -8,11 +8,18 @@ pipeline {
                 sh 'npm run-script build'
                 sh 'npm run-script test'
             } 
+            post{
+                always {
+                    junit "test-results/*.xml"
+                }
+                success {
+                    archiveArtifacts 'public/**/*'
+                }
+            }
         }
         stage('Deploy') {
             steps {
-               sh "cp -r public sites"
-               sh "docker cp sites student1:/"
+               
             }
         }
         stage('Smoke Test') {
