@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                git 'https://github.com/lmoreault/drum-machine.git'
+                //git 'https://github.com/lmoreault/drum-machine.git'
                 sh 'npm install'
                 sh 'npm run-script build'
                 sh 'npm run-script test'
