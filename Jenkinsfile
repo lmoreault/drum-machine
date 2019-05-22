@@ -8,7 +8,7 @@ pipeline {
                 sh 'npm run-script build'
                 sh 'npm run-script test'
             } 
-            post{
+            post {
                 always {
                     junit "test-results/*.xml"
                 }
@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-               
+               sh "echo edploying"
             }
         }
         stage('Smoke Test') {
