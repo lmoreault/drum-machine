@@ -19,12 +19,13 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-               sh "echo This is sparta"
+                copyArtifacts(projectName: 'drum-machine-pipeline', target: 'build')
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'Jay Dee Machine', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'build')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
         }
         stage('Smoke Test') {
             steps {
-               sh "curl http://localhost:8081"
+                sh "curl http://localhost:8081"
             }
         }
     }
