@@ -3,14 +3,21 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                git 'https://bitbucket.org/webergregoire/drum-machine.git'
+                git 'https://github.com/lmoreault/drum-machine.git'
                 sh 'npm install'
                 sh 'npm run-script build'
+                sh 'npm run-script test'
+            } 
+        }
+        stage('Deploy') {
+            steps {
+               sh "cp -r public sites"
+               sh "docker cp sites student1:/"
             }
         }
-        stage('Test') {
+        stage('Smoke Test') {
             steps {
-                sh 'npm run-script test'
+               sh "curl http://localhost:8081"
             }
         }
     }
