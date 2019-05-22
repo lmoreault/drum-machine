@@ -10,7 +10,7 @@ pipeline {
             } 
             post {
                 always {
-                    junit "test-results/*.xml"
+                    junit "tests-results/*.xml"
                 }
                 success {
                     archiveArtifacts 'public/**/*'
@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-               sh "echo edploying"
+               sh "echo This is sparta"
             }
         }
         stage('Smoke Test') {
